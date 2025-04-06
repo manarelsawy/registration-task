@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+    --bg-main:black;
+    --text-main:white;
+
+} 
+
+
+
+body{
+
+    background-color:var(--bg-main) ;
+    color: var(--text-main);
+
+div{
+    background-color:var(--bg-main) ;
+    color: var(--text-main);
+
+    label{
+        background-color:var(--bg-main) ;
+        color: var(--text-main);
+    }
+    input{
+        background-color:var(--bg-main) ;
+        color: var(--text-main);
+    }
+    
+}
+ }
+ 
+
+
+ .p-inputtext.p-component.p-element.p-inputnumber-input ,
+ .p-inputnumber.p-component,
+ .p-password.p-component.p-inputwrapper.p-input-icon-right,
+ .p-inputtext.p-component.p-element.p-password-input
+ {
+    width: 100% !important ;
+ }
+ 

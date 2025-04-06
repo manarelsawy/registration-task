@@ -1,4 +1,113 @@
+<section>
 
-<div class="card flex justify-content-center">
-    <input type="text" pInputText [(ngModel)]="value" />
-</div>
+    <div class="container">
+   <div class="row">
+    <div class="w-75 mx-auto p-4  ">
+        <form [formGroup]="resgisterFrom" class="px-2">
+            <h1>Registration form</h1>
+            
+            <div class="d-flex flex-column justify-content-center ">
+                <label for="firstName">Frist Name</label>
+                <input
+                [ngClass]="{
+                    'is-valid': !resgisterFrom.get('name')?.errors && (resgisterFrom.get('name')?.touched || resgisterFrom.get('name')?.dirty)   ,
+                    'is-invalid': resgisterFrom.get('name')?.errors && (resgisterFrom.get('name')?.touched || resgisterFrom.get('name')?.dirty)
+                }"
+                 id="firstName" type="text" placeholder="Frist Name" pInputText />
+                 @if(resgisterFrom.get('name')?.errors && (resgisterFrom.get('name')?.touched || resgisterFrom.get('name')?.dirty))
+            {
+                <div class="alert alert-danger w-100 p-1">
+                    @if(resgisterFrom.get('name')?.getError('required'))
+                    {
+                        <p class="m-0">Name Is Required</p>
+                    }
+                    @else if (resgisterFrom.get('name')?.getError('minlength')) 
+                    {
+                        <p class="m-0">Name Shoud be more than or equal 3 chars</p>
+                    }
+                    @else if (resgisterFrom.get('name')?.getError('maxlength')) 
+                    {
+                        <p class="m-0">Name Shoud be less than or equal 20 chars</p>
+                    }
+
+                </div>
+            }
+            </div>
+            
+            <div class=" d-flex flex-column justify-content-center">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" placeholder="Last Name" type="text" pInputText />
+            </div>
+            <div class=" d-flex flex-column justify-content-center">
+                <label for="email">Email</label>
+                <input
+                [ngClass]="{
+                    'is-valid': ! resgisterFrom.get('email')?.errors && (resgisterFrom.get('email')?.touched || resgisterFrom.get('email')?.dirty) ,
+                    'is-invalid': resgisterFrom.get('email')?.errors && (resgisterFrom.get('email')?.touched || resgisterFrom.get('email')?.dirty)
+    
+                }"
+                id="email" placeholder="Email" type="email" pInputText />
+                @if(resgisterFrom.get('email')?.errors && (resgisterFrom.get('email')?.touched || resgisterFrom.get('email')?.dirty))
+                {
+                    <div class="alert alert-danger w-100 p-1">
+                        @if(resgisterFrom.get('email')?.getError('required'))
+                        {
+                            <p class="m-0">Email Is Required</p>
+                        }
+                        @else if (resgisterFrom.get('email')?.getError('email')) 
+                        {
+                            <p class="m-0">Enter Valid Email</p>
+                        }
+                        
+    
+                    </div>
+                }
+            </div>
+
+            <div class=" d-flex flex-column justify-content-center">
+                <label for="age">Age</label>
+                <p-inputNumber
+                [ngClass]="{
+                    'is-valid': ! resgisterFrom.get('age')?.errors && (resgisterFrom.get('age')?.touched || resgisterFrom.get('age')?.dirty) ,
+                    'is-invalid': resgisterFrom.get('age')?.errors && (resgisterFrom.get('age')?.touched || resgisterFrom.get('age')?.dirty)
+    
+                }"
+                id="age" placeholder="Age" inputId="integeronly" formControlName="value" />
+            </div>
+            <div class=" d-flex flex-column justify-content-center">
+                <label for="password">Password</label>
+                <p-password 
+                [ngClass]="{
+                    'is-valid': !resgisterFrom.get('password')?.errors && (resgisterFrom.get('password')?.touched || resgisterFrom.get('password')?.dirty) ,
+                    'is-invalid': resgisterFrom.get('password')?.errors && (resgisterFrom.get('password')?.touched || resgisterFrom.get('password')?.dirty)
+                }"
+                id="password" placeholder="Password" [toggleMask]="true" />
+                
+                @if(resgisterFrom.get('password')?.errors && (resgisterFrom.get('password')?.touched || resgisterFrom.get('password')?.dirty))
+                {
+                    <div class="alert alert-danger w-100 p-1">
+                        @if(resgisterFrom.get('password')?.getError('required'))
+                        {
+                            <p class="m-0">Password Is Required</p>
+                        }
+                        @else if (resgisterFrom.get('password')?.getError('pattern')) 
+                        {
+                            <p class="m-0">Enter Valid Password</p>
+                        }
+                
+            </div>
+        }
+                
+            </div>
+            <div class="w-100 text-center my-4 ">
+                <button class="btn btn-primary w-100"> SignUp</button>
+            </div>
+            
+        </form>
+    </div>
+     
+   </div>
+
+    </div>
+</section>
+
