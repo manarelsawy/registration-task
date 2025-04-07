@@ -46,7 +46,7 @@ export class SignupComponent {
   onSubmit() {
     if (this.studentForm.valid) {
       const formData = this.studentForm.value;
-      this._HttpClient.post('http://localhost:3000/signup', formData).subscribe({
+      this._HttpClient.post('https://026e-156-209-21-78.ngrok-free.app/signup', formData).subscribe({
         next: (res:any) => {
           if (res.token) {
             localStorage.setItem('token', res.token);

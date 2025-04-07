@@ -35,7 +35,7 @@ export class LoginComponent {
   onLogin() {
     if (this.loginForm.valid) {
       const loginData = this.loginForm.value;
-      this._HttpClient.post('http://localhost:3000/login', loginData).subscribe({
+      this._HttpClient.post('https://026e-156-209-21-78.ngrok-free.app/login', loginData).subscribe({
         next: (res:any) => {
           if (res.token) {
             localStorage.setItem('token', res.token);
