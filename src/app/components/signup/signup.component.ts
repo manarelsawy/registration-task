@@ -10,6 +10,7 @@ import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
+import { Token } from '@angular/compiler';
 
 @Component({
   selector: 'app-signup',
@@ -32,7 +33,7 @@ export class SignupComponent {
 
 
   studentForm:FormGroup = this._FormBuilder.group({
-    firstName: [null, Validators.required],
+    firstName: [null, Validators.required , ],
     lastName: [null, Validators.required],
     email: [null, [Validators.required, Validators.email]],
     age: [null, [Validators.required, Validators.min(4)]],
@@ -47,8 +48,14 @@ export class SignupComponent {
     if (this.studentForm.valid) {
       const formData = this.studentForm.value;
       this._HttpClient.post('http://localhost:3000/signup', formData).subscribe({
-        next: (res) => {
-          console.log(res)
+        next: (res:any) => {
+          if (res.token) {
+            localStorage.setItem('token', res.token);
+            localStorage.setItem('user', JSON.stringify(res.user));
+          }
+          console.log(res.token)
+          
+          
           this._messageService.add({
             severity: 'success',
             summary: 'Success',
