@@ -1,6 +1,6 @@
 <section class="py-4">
     <div class="container mt-5">
-    <div  *ngIf="showLogin" class="card p-4 shadow">
+    <div  class="card p-4 shadow">
         <h2 class="mb-4">Login</h2>
         <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
           <div class="mb-3">
@@ -13,6 +13,10 @@
           </div>
           <button pButton type="submit" label="Login" class="p-button-primary"></button>
         </form>
+      </div>
+      <div class="row">
+
+        <button pButton routerLink='/signup'    class="p-button-success ms-auto w-auto mt-3 rounded-2 ">Signup</button>
       </div>
     </div>
 </section>

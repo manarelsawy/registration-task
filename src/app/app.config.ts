@@ -8,6 +8,7 @@ import { provideHttpClient, withFetch} from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 

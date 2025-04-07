@@ -8,13 +8,13 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { NgIf } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule , InputTextModule , ReactiveFormsModule, InputNumberModule , PasswordModule ,ToastModule , ButtonModule , NgIf ],
+  imports: [FormsModule , InputTextModule , ReactiveFormsModule, InputNumberModule , PasswordModule ,ToastModule , ButtonModule , NgIf ,RouterLink ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -36,16 +36,23 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const loginData = this.loginForm.value;
       this._HttpClient.post('http://localhost:3000/login', loginData).subscribe({
-        next: () => {
+        next: (res:any) => {
+          if (res.token) {
+            localStorage.setItem('token', res.token);
+            localStorage.setItem('user', JSON.stringify(res.user));
+          }
+          //
           this._messageService.add({
             severity: 'success',
             summary: 'Logged In',
             detail: 'Login successful'
           });
           this.loginForm.reset();
-          setTimeout(()=>{
-            this._Router.navigate(['/home'])
-          }, 2000);
+          this._Router.navigate(['/home'])
+          
+          // setTimeout(()=>{
+          //   this._Router.navigate(['/home'])
+          // }, 2000);
         },
         error: (err) => {
           this._messageService.add({

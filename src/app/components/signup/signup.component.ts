@@ -9,13 +9,13 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { NgIf } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Token } from '@angular/compiler';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ FormsModule , InputTextModule , ReactiveFormsModule, InputNumberModule , PasswordModule ,ToastModule , ButtonModule ,NgIf ],
+  imports: [ FormsModule , InputTextModule , ReactiveFormsModule, InputNumberModule , PasswordModule ,ToastModule , ButtonModule ,NgIf  ,RouterLink],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
@@ -29,7 +29,6 @@ export class SignupComponent {
   showLogin = false;
 
 
-  // studentForm!: FormGroup;
 
 
   studentForm:FormGroup = this._FormBuilder.group({
@@ -53,7 +52,7 @@ export class SignupComponent {
             localStorage.setItem('token', res.token);
             localStorage.setItem('user', JSON.stringify(res.user));
           }
-          console.log(res.token)
+          // console.log(res)
           
           
           this._messageService.add({
@@ -64,9 +63,14 @@ export class SignupComponent {
           this.studentForm.reset();
           this.showLogin = true;
 
-          setTimeout(()=>{
-            this._Router.navigate(['/home'])
-          }, 2000);
+          
+          this._Router.navigate(['/home'])
+
+
+          // setTimeout(()=>{
+          //   this._Router.navigate(['/home'])
+            
+          // },);
         },
         error: (err) => {
           this._messageService.add({
