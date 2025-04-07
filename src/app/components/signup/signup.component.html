@@ -1,106 +1,44 @@
-<section>
+<!-- <section>
+    <p-toast></p-toast>
 
     <div class="container">
    <div class="row">
     <div class="w-75 mx-auto p-4  ">
-        <form [formGroup]="resgisterFrom" class="px-2">
+        <form [formGroup]="studentForm" (ngSubmit)="onSubmit()" class="px-2">
             <h1>Registration form</h1>
             
             <div class="d-flex flex-column justify-content-center ">
                 <label for="firstName">Frist Name</label>
-                <input
-                [ngClass]="{
-                    'is-valid': !resgisterFrom.get('name')?.errors && (resgisterFrom.get('name')?.touched || resgisterFrom.get('name')?.dirty)   ,
-                    'is-invalid': resgisterFrom.get('name')?.errors && (resgisterFrom.get('name')?.touched || resgisterFrom.get('name')?.dirty)
-                }"
+                <input formControlName="firstName" class="form-control"
                  id="firstName" type="text" placeholder="Frist Name" pInputText />
-                 @if(resgisterFrom.get('name')?.errors && (resgisterFrom.get('name')?.touched || resgisterFrom.get('name')?.dirty))
-            {
-                <div class="alert alert-danger w-100 p-1">
-                    @if(resgisterFrom.get('name')?.getError('required'))
-                    {
-                        <p class="m-0">Name Is Required</p>
-                    }
-                    @else if (resgisterFrom.get('name')?.getError('minlength')) 
-                    {
-                        <p class="m-0">Name Shoud be more than or equal 3 chars</p>
-                    }
-                    @else if (resgisterFrom.get('name')?.getError('maxlength')) 
-                    {
-                        <p class="m-0">Name Shoud be less than or equal 20 chars</p>
-                    }
-
+                
                 </div>
-            }
-            </div>
             
             <div class=" d-flex flex-column justify-content-center">
                 <label for="lastName">Last Name</label>
-                <input id="lastName" placeholder="Last Name" type="text" pInputText />
+                <input formControlName="lastName" class="form-control"
+                id="lastName" placeholder="Last Name" type="text" pInputText />
             </div>
             <div class=" d-flex flex-column justify-content-center">
                 <label for="email">Email</label>
-                <input
-                [ngClass]="{
-                    'is-valid': ! resgisterFrom.get('email')?.errors && (resgisterFrom.get('email')?.touched || resgisterFrom.get('email')?.dirty) ,
-                    'is-invalid': resgisterFrom.get('email')?.errors && (resgisterFrom.get('email')?.touched || resgisterFrom.get('email')?.dirty)
-    
-                }"
+                <input formControlName="email" class="form-control"
                 id="email" placeholder="Email" type="email" pInputText />
-                @if(resgisterFrom.get('email')?.errors && (resgisterFrom.get('email')?.touched || resgisterFrom.get('email')?.dirty))
-                {
-                    <div class="alert alert-danger w-100 p-1">
-                        @if(resgisterFrom.get('email')?.getError('required'))
-                        {
-                            <p class="m-0">Email Is Required</p>
-                        }
-                        @else if (resgisterFrom.get('email')?.getError('email')) 
-                        {
-                            <p class="m-0">Enter Valid Email</p>
-                        }
-                        
-    
                     </div>
-                }
-            </div>
 
             <div class=" d-flex flex-column justify-content-center">
                 <label for="age">Age</label>
-                <p-inputNumber
-                [ngClass]="{
-                    'is-valid': ! resgisterFrom.get('age')?.errors && (resgisterFrom.get('age')?.touched || resgisterFrom.get('age')?.dirty) ,
-                    'is-invalid': resgisterFrom.get('age')?.errors && (resgisterFrom.get('age')?.touched || resgisterFrom.get('age')?.dirty)
-    
-                }"
+                <p-inputNumber formControlName="age" class="form-control"
                 id="age" placeholder="Age" inputId="integeronly" formControlName="value" />
             </div>
             <div class=" d-flex flex-column justify-content-center">
                 <label for="password">Password</label>
                 <p-password 
-                [ngClass]="{
-                    'is-valid': !resgisterFrom.get('password')?.errors && (resgisterFrom.get('password')?.touched || resgisterFrom.get('password')?.dirty) ,
-                    'is-invalid': resgisterFrom.get('password')?.errors && (resgisterFrom.get('password')?.touched || resgisterFrom.get('password')?.dirty)
-                }"
                 id="password" placeholder="Password" [toggleMask]="true" />
                 
-                @if(resgisterFrom.get('password')?.errors && (resgisterFrom.get('password')?.touched || resgisterFrom.get('password')?.dirty))
-                {
-                    <div class="alert alert-danger w-100 p-1">
-                        @if(resgisterFrom.get('password')?.getError('required'))
-                        {
-                            <p class="m-0">Password Is Required</p>
-                        }
-                        @else if (resgisterFrom.get('password')?.getError('pattern')) 
-                        {
-                            <p class="m-0">Enter Valid Password</p>
-                        }
-                
             </div>
-        }
                 
-            </div>
             <div class="w-100 text-center my-4 ">
-                <button class="btn btn-primary w-100"> SignUp</button>
+                <button  type="submit" label="Register" class="btn btn-primary w-100"> SignUp</button>
             </div>
             
         </form>
@@ -109,5 +47,107 @@
    </div>
 
     </div>
+</section> -->
+
+
+
+<section class="py-4">
+    <p-toast></p-toast>
+<div class="container mt-5">
+  <div *ngIf="!showLogin"  class="card p-4 shadow">
+    <h2 class="mb-4">Student Registration</h2>
+    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">First Name</label>
+        <input type="text" class="form-control" formControlName="firstName">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Last Name</label>
+        <input type="text" class="form-control" formControlName="lastName">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" formControlName="email">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Age</label>
+        <input type="number" class="form-control" formControlName="age">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">password</label>
+        <input type="password" class="form-control" formControlName="password">
+      </div>
+      <button pButton type="submit"  class="p-button-success">Register</button>
+    </form>
+  </div>
+  <div class="row">
+
+    <button pButton   class="p-button-primeray ms-auto w-auto mt-3 ">Signin</button>
+  </div>
+</div>
+
 </section>
 
+<!-- <a href="https://front.codes/" class="logo" target="_blank">
+    <img src="https://assets.codepen.io/1462889/fcy.png" alt="">
+</a> -->
+
+<!-- <div class="section">
+    <div class="container">
+        <div class="row full-height justify-content-center">
+            <div class="col-12 text-center align-self-center py-5">
+                <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                    <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+                      <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+                      <label for="reg-log"></label>
+                    <div class="card-3d-wrap mx-auto">
+                        <div class="card-3d-wrapper">
+                            <div class="card-front">
+                                <div class="center-wrap">
+                                    <div class="section text-center">
+                                        <h4 class="mb-4 pb-3">Log In</h4>
+                                        <div class="form-group">
+                                            <input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+                                            <i class="input-icon uil uil-at"></i>
+                                        </div>	
+                                        <div class="form-group mt-2">
+                                            <input type="password" formControlName="firstName" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+                                            <i class="input-icon uil uil-lock-alt"></i>
+                                        </div>
+                                        <a href="#" class="btn mt-4">submit</a>
+                                        <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
+                                      </div>
+                                  </div>
+                              </div>
+                            <div class="card-back">
+                                <div class="center-wrap">
+                                    <div class="section text-center">
+                                        <h4 class="mb-4 pb-3">Sign Up</h4>
+                                        <div class="form-group">
+                                            <input type="text" formControlName="firstName" name="firstName" class="form-style" placeholder="Your Frist Name" id="firstName" autocomplete="off">
+                                            <i class="input-icon uil uil-user"></i>
+                                        </div>	
+                                        <div class="form-group">
+                                            <input type="text" formControlName="lastName" name="logname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off">
+                                            <i class="input-icon uil uil-user"></i>
+                                        </div>	
+                                        
+                                        <div class="form-group mt-2">
+                                            <input type="email" formControlName="email" name="email" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+                                            <i class="input-icon uil uil-at"></i>
+                                        </div>	
+                                        <div class="form-group mt-2">
+                                            <input type="password" formControlName="age" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+                                            <i class="input-icon uil uil-lock-alt"></i>
+                                        </div>
+                                        <a href="#" class="btn mt-4">submit</a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+    </div>
+</div> -->
